@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Enquiry Form</title>
+    <style>
+        /* Basic styling for body */
+        body {
+            font-family: Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Container for the entire layout */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* Left sidebar styles */
+        .left-sidebar {
+            width: 250px;
+            padding: 20px 10px;
+        }
+
+        /* Right sidebar styles */
+        .right-sidebar {
+            width: 250px;
+            padding: 20px 10px;
+        }
+
+        /* Main content area */
+        .main-content {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        /* Sidebar section headers */
+        .sidebar h4 {
+            color: rgb(71, 182, 20);
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-bottom: 2px solid rgb(71, 182, 20);
+            padding-bottom: 5px;
+        }
+
+        /* Sidebar link containers */
+        .sidebar-link {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .sidebar-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Sidebar images */
+        .sidebar-link img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        /* Sidebar link text */
+        .sidebar-link a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+            display: block;
+        }
+
+        .sidebar-link a:hover {
+            color: rgb(71, 182, 20);
+        }
+
+        /* Sidebar description text */
+        .sidebar-link p {
+            font-size: 12px;
+            color: #666;
+            margin: 5px 0 0 0;
+            line-height: 1.3;
+        }
+
+        /* Navigation bar styling */
+        nav {
+            background: linear-gradient(135deg, rgb(71, 182, 20), rgb(45, 140, 10));
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Styling for navigation links */
+        nav a {
+            color: rgb(255, 255, 255);
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover effect for navigation links */
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+            color: rgb(255, 245, 230);
+        }
+
+        /* Ripple effect on click */
+        nav a::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        nav a:active::after {
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+        }
+
+        /* Main heading styling */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: rgb(71, 182, 20);
+        }
+
+        /* Form container styling */
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logo above form */
+        .form-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-logo img {
+            width: 150px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Label styling */
+        label {
+            margin-bottom: 5px;
+            display: block;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Input, select, and textarea styling */
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: rgb(71, 182, 20);
+            box-shadow: 0 0 8px rgba(71, 182, 20, 0.3);
+            outline: none;
+        }
+
+        /* Checkbox container styling */
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+
+        /* Button styling */
+        button {
+            background-color: rgb(71, 182, 20);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: rgb(45, 140, 10);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Result div styling */
+        #result {
+            text-align: center;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            border-radius: 10px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #result.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .left-sidebar, .right-sidebar {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                gap: 15px;
+            }
+
+            .sidebar-link {
+                min-width: 200px;
+                flex-shrink: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation bar with links to different pages -->
+    <nav>
+        <a href="homePage.html">Home Page</a>
+        <a href="programEvents.html">Program Events</a>
+        <a href="generalInformation.html">General Information</a>
+        <a href="participationInformation.html">Participation Information</a>
+        <a href="aboutUs.html">About Us</a>
+        <a href="inquiry.html">Inquiry</a>
+    </nav>
+
+    <div class="main-container">
+        <!-- Left Sidebar - Charity Organizations -->
+        <aside class="left-sidebar sidebar">
+            <h4>Charity Organizations</h4>
+            
+            <div class="sidebar-link">
+                <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=300&h=200&fit=crop" alt="Red Cross">
+                <a href="https://www.redcross.org" target="_blank">Red Cross</a>
+                <p>International humanitarian organization providing emergency assistance</p>
+            </div>
+            
+            <div class="sidebar-link">
+                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=300&h=200&fit=crop" alt="UNICEF">
+                <a href="https://www.unicef.org" target="_blank">UNICEF</a>
+                <p>United Nations Children's Fund supporting children worldwide</p>
+            </div>
+            
+            <div class="sidebar-link">
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop" alt="World Vision">
+                <a href="https://www.worldvision.org" target="_blank">World Vision</a>
+                <p>Christian humanitarian organization dedicated to working with children</p>
+            </div>
+            
+            <div class="sidebar-link">
+                <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=300&h=200&fit=crop" alt="Oxfam">
+                <a href="https://www.oxfam.org" target="_blank">Oxfam</a>
+                <p>Global organization working to end the injustice of poverty</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Main heading for the Event Enquiry Form -->
+            <h1>Event Enquiry Form</h1>
+
+            <!-- Logo above form -->
+            <div class="form-logo">
+                <img src="https://images.unsplash.com/photo-1595435289889-48c71822d373?w=150&h=100&fit=crop" alt="Charity Run Logo">
+            </div>
+
+            <!-- Form for user to submit an enquiry -->
+            <form id="registrationForm">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter Your Name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
+
+                <label for="interestedEvent">Interested Event:</label>
+                <select id="interestedEvent" name="interestedEvent" required>
+                    <option value="">Select Your Interested Event</option>
+                    <option value="To Join">To Join</option>
+                    <option value="Event Activities">Event Activities</option>
+                </select>
+
+                <label for="categoryOfEnquiry">Category of Enquiry:</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="category" value="registrationFees"> Registration Fees <br>
+                    <input type="checkbox" name="category" value="rules"> Rules & Guidelines <br>
+                </div>
+
+                <label for="detailedEnquiry">Detailed Enquiry:</label>
+                <textarea id="detailedEnquiry" name="detailedEnquiry" rows="7" placeholder="Type here..." required></textarea>
+
+                <button type="button" onclick="submitForm()">Submit</button>
+                <button type="reset">Cancel</button>
+            </form>
+
+            <!-- Div for displaying the result of the form submission -->
+            <div id="result"></div>
+        </main>
+
+        <!-- Right Sidebar - Running & Health Resources -->
+        <aside class="right-sidebar sidebar">
+            <h4>Running & Health Resources</h4>
+            
+            <div class="sidebar-link">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop" alt="Running Training">
+                <a href="https://www.runnersworld.com" target="_blank">Runner's World</a>
+                <p>Complete guide to running, training plans and nutrition tips</p>
+            </div>
+            
+            <div class="sidebar-link">
+                <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=300&h=200&fit=crop" alt="Strava">
+                <a href="https://www.strava.com" target="_blank">Strava</a>
+                <p>Social fitness network for athletes to track and share activities</p>
+            </div>
+            
+            <div class="sidebar-link">
+                <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=300&h=200&fit=crop" alt="Nike Run Club">
+                <a href="https://www.nike.com/nrc-app" target="_blank">Nike Run Club</a>
+                <p>Free running app with guided runs and training programs</p>
+            </div>
+            
+            <div class="sidebar-link">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=300&h=200&fit=crop" alt="MyFitnessPal">
+                <a href="https://www.myfitnesspal.com" target="_blank">MyFitnessPal</a>
+                <p>Nutrition tracking and calorie counter for healthy lifestyle</p>
+            </div>
+            
+            <div class="sidebar-link">
+                <img src="https://images.unsplash.com/photo-1594736797933-d0c62c3f7d00?w=300&h=200&fit=crop" alt="Charity Miles">
+                <a href="https://charitymiles.org" target="_blank">Charity Miles</a>
+                <p>App that turns miles into money for charity organizations</p>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        function submitForm() {
+            const fullName = document.getElementById("fullName").value;
+            const email = document.getElementById("email").value;
+            const interestedEvent = document.getElementById("interestedEvent").value;
+            const categories = Array.from(document.querySelectorAll('input[name="category"]:checked'))
+                                  .map(input => input.value)
+                                  .join(", ") || "None";
+            const detailedEnquiry = document.getElementById("detailedEnquiry").value;
+
+            if (!fullName || !email || !interestedEvent || !detailedEnquiry) {
+                alert('Please fill in all required fields!');
+                return;
+            }
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `
+                <h2>Submission Successful!</h2>
+                <p><b>Name:</b> ${fullName}</p>
+                <p><b>Email:</b> ${email}</p>
+                <p><b>Interested Event:</b> ${interestedEvent}</p>
+                <p><b>Category of Enquiry:</b> ${categories}</p>
+                <p><b>Detailed Enquiry:</b> ${detailedEnquiry}</p>
+            `;
+            resultDiv.classList.add("show");
+        }
+    </script>
+</body>
+</html>
